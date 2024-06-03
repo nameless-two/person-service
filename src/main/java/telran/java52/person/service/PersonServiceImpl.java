@@ -41,7 +41,7 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public List<PersonDto> findPersonsByCity(String city) {
-		List<Person> res = personRepository.findByCityIgnoreCase(city);
+		List<Person> res = personRepository.findByAddressCityIgnoreCase(city);
 		return res.stream().map(p -> modelMapper.map(p, PersonDto.class)).toList();
 	}
 
@@ -52,11 +52,11 @@ public class PersonServiceImpl implements PersonService {
 		return res.stream().map(p -> modelMapper.map(p, PersonDto.class)).toList();
 	}
 
+	@Transactional
 	@Override
 	public PersonDto updatePersonName(Integer id, String name) {
 		Person person = personRepository.findById(id).orElseThrow(PersonNotFoundException::new);
 		person.setName(name);
-		personRepository.save(person);
 		return modelMapper.map(person, PersonDto.class);
 	}
 
@@ -68,18 +68,18 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public List<CityPopulationDto> getCitiesPopulation() {
-		// TODO Auto-generated method stub
-		return null;
+		return personRepository.getCitiesPopulation();
 	}
 
+	@Transactional
 	@Override
 	public PersonDto updatePersonAddress(Integer id, AddressDto newAddress) {
 		Person person = personRepository.findById(id).orElseThrow(PersonNotFoundException::new);
 		person.setAddress(modelMapper.map(newAddress, Address.class));
-		personRepository.save(person);
 		return modelMapper.map(person, PersonDto.class);
 	}
 
+	@Transactional
 	@Override
 	public PersonDto deletePerson(Integer id) {
 		Person person = personRepository.findById(id).orElseThrow(PersonNotFoundException::new);
