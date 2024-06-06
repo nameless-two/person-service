@@ -10,13 +10,13 @@ public interface PersonService {
 
 	PersonDto findPersonById(Integer id);
 
-	Iterable<PersonDto> findPersonsByCity(String city);
+	PersonDto[] findPersonsByCity(String city);
 
-	Iterable<PersonDto> findPersonsByAgeBetween(Integer minAge, Integer maxAge);
+	PersonDto[] findPersonsByAgeBetween(Integer minAge, Integer maxAge);
 
 	PersonDto updatePersonName(Integer id, String name);
 
-	Iterable<PersonDto> findPersonsbyName(String name);
+	PersonDto[] findPersonsbyName(String name);
 
 	Iterable<CityPopulationDto> getCitiesPopulation();
 

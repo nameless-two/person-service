@@ -12,10 +12,8 @@ import telran.java52.person.model.Person;
 
 public interface PersonRepository extends JpaRepository<Person, Integer> {
 
-	@Query("select p from Person p where p.name=?1")
 	List<Person> findByNameIgnoreCase(String name);
 
-	@Query("select p from Person p where p.address.city=:cityName")
 	List<Person> findByAddressCityIgnoreCase(@Param("cityName") String city);
 
 	List<Person> findByBirthDateBetween(LocalDate startDate, LocalDate endDate);

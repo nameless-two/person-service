@@ -33,12 +33,12 @@ public class PersonController {
 	}
 
 	@GetMapping("/city/{city}")
-	public Iterable<PersonDto> findPersonsByCity(@PathVariable String city) {
+	public PersonDto[] findPersonsByCity(@PathVariable String city) {
 		return personService.findPersonsByCity(city);
 	}
 
 	@GetMapping("/ages/{minAge}/{maxAge}")
-	public Iterable<PersonDto> findPersonsByAge(@PathVariable Integer minAge, @PathVariable Integer maxAge) {
+	public PersonDto[] findPersonsByAge(@PathVariable Integer minAge, @PathVariable Integer maxAge) {
 		return personService.findPersonsByAgeBetween(minAge, maxAge);
 	}
 
@@ -48,7 +48,7 @@ public class PersonController {
 	}
 
 	@GetMapping("/name/{name}")
-	public Iterable<PersonDto> findPersonsByName(@PathVariable String name) {
+	public PersonDto[] findPersonsByName(@PathVariable String name) {
 		return personService.findPersonsbyName(name);
 	}
 
