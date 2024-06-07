@@ -17,8 +17,14 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 	List<Person> findByAddressCityIgnoreCase(@Param("cityName") String city);
 
 	List<Person> findByBirthDateBetween(LocalDate startDate, LocalDate endDate);
-	
+
 	@Query("select new telran.java52.person.dto.CityPopulationDto(p.address.city, count(p)) from Person p group by p.address.city order by count(p) DESC")
 	List<CityPopulationDto> getCitiesPopulation();
+
+	@Query("select c from Child c")
+	List<Person> findAllChildren();
+
+	@Query("select e from Employee e where e.salary between ?1 and ?2")
+	List<Person> findBySalaryBetween(long minSalary, long maxSalary);
 
 }

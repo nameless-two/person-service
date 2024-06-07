@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import telran.java52.person.dao.PersonRepository;
 import telran.java52.person.dto.AddressDto;
+import telran.java52.person.dto.ChildDto;
 import telran.java52.person.dto.CityPopulationDto;
+import telran.java52.person.dto.EmployeeDto;
 import telran.java52.person.dto.PersonDto;
 import telran.java52.person.dto.exception.PersonNotFoundException;
 import telran.java52.person.model.Address;
@@ -89,6 +91,17 @@ public class PersonServiceImpl implements PersonService, CommandLineRunner {
 		Person person = personRepository.findById(id).orElseThrow(PersonNotFoundException::new);
 		personRepository.deleteById(id);
 		return mapper.maptoDto(person);
+	}
+
+	@Override
+	public PersonDto[] findAllChildren() {
+		return personRepository.findAllChildren().stream().map(c -> mapper.maptoDto(c)).toArray(ChildDto[]::new);
+	}
+
+	@Override
+	public PersonDto[] findBySalaryBetween(long minSalary, long maxSalary) {
+		return personRepository.findBySalaryBetween(minSalary, maxSalary).stream().map(e -> mapper.maptoDto(e))
+				.toArray(EmployeeDto[]::new);
 	}
 
 	@Override

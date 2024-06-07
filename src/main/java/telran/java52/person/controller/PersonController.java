@@ -66,4 +66,14 @@ public class PersonController {
 	public PersonDto deletePerson(@PathVariable Integer id) {
 		return personService.deletePerson(id);
 	}
+
+	@GetMapping("/children")
+	public PersonDto[] findAllChildren() {
+		return personService.findAllChildren();
+	}
+
+	@GetMapping("/salary/{minSalary}/{maxSalary}")
+	public PersonDto[] findEmployeesBySalaryBetween(@PathVariable long minSalary, @PathVariable long maxSalary) {
+		return personService.findBySalaryBetween(minSalary, maxSalary);
+	}
 }

@@ -24,4 +24,8 @@ public interface PersonService {
 
 	PersonDto deletePerson(Integer id);
 
+	PersonDto[] findAllChildren();
+
+	PersonDto[] findBySalaryBetween(long minSalary, long maxSalary);
+
 }
